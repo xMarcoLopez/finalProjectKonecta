@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/template::head">
+</head>
+<body>
+	<nav th:replace="layouts/template::navbar"></nav>
+	<div class="container mt-5">
+		<h1>Cambios realizados</h1>
+		<hr>
+		<div class="row text-right">
+			<div class="col">
+				<a th:href="@{/views/projects/index}" class="btn btn-danger"> <i
+					class="fa fa-arrow-left"> Regresar</i>
+				</a>
+			</div>
+		</div>
+
+		<table class="table mt-3">
+			<thead class="table-dark">
+				<tr>
+					<th class="text-center" scope="col">#</th>
+					<th class="text-center" scope="col">Fecha</th>
+					<th class="text-center" scope="col">Usuario</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="projectUpdateList, i:${projectUpdateList}">
+					<th scope="row" class="text-center" th:text="${i.index + 1}"></th>
+					<td class="text-center" th:text="${projectUpdateList.updateDate}"></td>
+					<td class="text-center" th:text="${projectUpdateList.user.username}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<footer th:replace="layouts/template::footer"></footer>
+</body>
+</html>

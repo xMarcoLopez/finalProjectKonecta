@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/template::head">
+</head>
+<body>
+	<nav th:replace="layouts/template::navbar"></nav>
+	<div class="container mt-5">
+		<h1 th:text="${title}"></h1>
+		<hr>
+		<div class="row text-right">
+			<div class="col">
+				<a th:href="@{/views/projects/index}" class="btn btn-danger"> <i
+					class="fa fa-arrow-left"> Regresar</i>
+				</a>
+			</div>
+		</div>
+
+		<form th:action="@{/views/projects/update}" th:object="${project}"
+			method="post">
+			<input type="hidden" th:field="*{id}">
+			<input type="hidden" th:field="*{creatorUser}">
+			<input type="hidden" th:field="*{creationDate}">
+			<input type="hidden" th:field="*{active}">
+			<input type="hidden" th:field="*{term}">
+			<div class="form-group">
+				<label for="name">Nombre del proyecto:</label> <input type="text" id="name"
+					th:field="*{name}" class="form-control col-md"
+					placeholder="Escribe el nombre del proyecto" required>
+			</div>
+			<div class="form-group">
+				<label for="area">Área:</label> <input type="text" id="area" th:field="*{area}"
+					class="form-control col-md"
+					placeholder="Escribe el �rea del proyecto" required>
+			</div>
+			<div class="form-group">
+				<label for="budget">Presupuesto:</label> <input type="text" id="budget" th:field="*{budget}"
+					class="form-control col-md"
+					placeholder="Escribe el presupuesto del proyecto" required>
+			</div>
+			<div class="form-group">
+				<label for="projectManager">Responsable:</label> <input type="text" id="projectManager"
+					th:field="*{projectManager}" class="form-control col-md"
+					placeholder="Escribe el responsable del proyecto" required>
+			</div>
+			<div class="form-group row">
+				<div class="col-md">
+					<label for="beginDate">Fecha inicio:</label> <input type="date" id="beginDate"
+						th:field="*{beginDate}" class="form-control col-md"
+						placeholder="Escribe el nombre del proyecto">
+				</div>
+				<div class="col-md">
+					<label for="endDate">Fecha fin:</label> <input type="date" id="endDate" th:field="*{endDate}"
+						class="form-control col-md"
+						placeholder="Escribe el nombre del proyecto">
+				</div>
+				<div class="col-md">
+					<label for="projectStatus">Estado:</label> <select id="projectStatus" th:field="*{projectStatus}"
+						class="form-control col-md">
+						<option th:each="projectStatus:${projectsStatus}"
+							th:value="${projectStatus.id}" th:text="${projectStatus.name}" />
+					</select>
+				</div>
+			</div>
+
+			<button type="submit" class="btn btn-primary mb-5">Guardar</button>
+		</form>
+	</div>
+
+	<footer th:replace="layouts/template::footer"></footer>
+
+</body>
+</html>

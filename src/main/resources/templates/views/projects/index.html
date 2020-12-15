@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/template::head">
+</head>
+<body>
+	<nav th:replace="layouts/template::navbar"></nav>
+	<div class="container mt-5">
+		<h1>Listado de Proyectos</h1>
+		<hr>
+		<div class="row">
+			<div class="col-md-2">
+				<a th:href="@{/views/projects/create}" class="btn btn-primary">
+					<i class="fa fa-plus"> Agregar</i>
+				</a>
+			</div>
+			<div class="col-md-6">
+				<div class="row">
+					<form class="d-flex" th:action="@{/views/projects/searchByDates}">
+						<span>Desde:</span>
+						<input class="form-control ml-1" name="beginDateSearch"
+							id="beginDateSearch" type="date" aria-label="Search" required> 
+						<span class="ml-1">Hasta:</span>
+						<input class="form-control ml-1" name="endDateSearch" id="endDateSearch" type="date"
+						 aria-label="Search" required>
+						<button class="btn btn-outline-success ml-1" type="submit">Filtrar</button>
+					</form>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="row">
+					<form class="d-flex" th:action="@{/views/projects/search}">
+						<input class="form-control" name="keyword" id="keyword"
+							type="search" placeholder="Buscar..." aria-label="Search"
+							required>
+						<button class="btn btn-outline-success ml-1" type="submit">Buscar</button>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<table class="table mt-3">
+			<thead class="table-dark">
+				<tr>
+					<th class="text-center" scope="col">#</th>
+					<th class="text-center" scope="col">Nombre</th>
+					<th class="text-center" scope="col">Área</th>
+					<th class="text-center" scope="col">Presupuesto</th>
+					<th class="text-center" scope="col">Responsable</th>
+					<th class="text-center" scope="col">Duración (en días)</th>
+					<th class="text-center" scope="col">Fecha de creación</th>
+					<th class="text-center" scope="col">Fecha inicio</th>
+					<th class="text-center" scope="col">Fecha fin</th>
+					<th class="text-center" scope="col">Creado por</th>
+					<th class="text-center" scope="col">Estado</th>
+					<th class="text-center" scope="col">Opciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="projectList, i:${projectList}">
+					<th scope="row" th:text="${i.index + 1}"></th>
+					<td class="text-center" th:text="${projectList.name}"></td>
+					<td class="text-center" th:text="${projectList.area}"></td>
+					<td class="text-center" th:text="${projectList.budget}"></td>
+					<td class="text-center" th:text="${projectList.projectManager}"></td>
+					<td class="text-center" th:text="${projectList.term}"></td>
+					<td class="text-center" th:text="${projectList.creationDate}"></td>
+					<td class="text-center" th:text="${projectList.beginDate}"></td>
+					<td class="text-center" th:text="${projectList.endDate}"></td>
+					<td class="text-center"
+						th:text="${projectList.creatorUser.username}"></td>
+					<td class="text-center" th:text="${projectList.projectStatus.name}"></td>
+					<td class="text-center">
+						<div class="row">
+							<div class="col-md-4">
+								<a class="btn btn-info mr-5"
+									th:href="@{/views/projects/edit/} + ${projectList.id}"> <i
+									class="fa fa-pencil-square-o"></i>
+								</a>
+							</div>
+							<div class="col-md-4">
+								<a class="btn btn-success ml-1"
+									th:href="@{/views/projects/detail/} + ${projectList.id}"> <i
+									class="fa fa-eye"></i>
+								</a>
+							</div>
+							<div class="col-md-4">
+								<a class="btn btn-danger ml-2"
+									th:href="@{/views/projects/delete/} + ${projectList.id}"> <i
+									class="fa fa-trash"></i>
+								</a>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<footer th:replace="layouts/template::footer"></footer>
+</body>
+</html>

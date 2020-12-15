@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/template::head">
+</head>
+<body class="body-login">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card">
+					<form class="box" th:object="${userForm}" th:action="@{/registration}" method="post">
+						<h1>Crear Usuario</h1>
+						<p class="text-muted">Por favor ingresa el usuario y contraseña que deseas tener</p>
+						<input type="text" th:field="*{username}" placeholder="Nombre de usuario"> <input
+							type="password" th:field="*{password}" placeholder="Contraseña"> <a
+							class="forgot text-muted" th:href="@{/login}">¿Ya estás registrado?</a> <input
+							type="submit" value="Crear">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<footer th:replace="layouts/template::footer"></footer>
+</body>
+</html>
